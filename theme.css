@@ -1,0 +1,60 @@
+/* Add your existing styles here */
+/*
+body {
+    transition: background-color 0.5s ease;
+    font-family: 'Jost', sans-serif;
+}
+p, h1, h2, h3, div, span, a, li, td, th, strong, em, small, big, i, b, u, s, sub, sup {
+    transition: color 0.5s ease;
+}
+*/
+#logo{
+    position: relative;
+    top:5px;
+}
+@media (width >= 576px) {
+    #logo {
+        position: absolute;
+        left: 0;
+        height: 80px;
+        top: initial;
+    }
+}
+
+h1{
+
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 4em;
+}
+h2{
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+}
+.bi-star-fill, bi-star-half{
+    font-size: 2em;
+}
+.price{
+    color: black !important;
+    text-shadow: 0.000em 0.3em #fff, 0.116em 0.276em #fff, 0.212em 0.212em #fff, 0.276em 0.116em #fff, 0.3em 0.000em #fff, 0.276em -0.116em #fff, 0.212em -0.212em #fff, 0.116em -0.276em #fff, 0.000em -0.3em #fff, -0.116em -0.276em #fff, -0.212em -0.212em #fff, -0.276em -0.116em #fff, -0.3em -0.000em #fff, -0.276em 0.116em #fff, -0.212em 0.212em #fff, -0.116em 0.276em #fff;    font-weight: 600;
+    font-family: 'Jost', sans-serif;
+    top: 160px !important;
+}
+.fraction {
+	top: -0.9em;
+	position: relative;
+}
+.price > span:nth-child(1){
+    font-size: 3.5em;
+
+}
+/*
+    font-family: 'Darker Grotesque', sans-serif;
+    font-family: 'Jost', sans-serif; 3 4 5 6 7 9
+
+    https://fonts.google.com/specimen/Jost?preview.text=Bahnschrift&preview.size=89&stroke=Sans+Serif
+*/
+
+#paypal-button-container{
+    max-width:750px; 
+    margin: auto;
+}
