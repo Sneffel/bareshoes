@@ -131,8 +131,8 @@ function sanitizeFileName($fileName) {
 
 function cachejson($file_name, $jsonurl, $folder, $debug = false)
 {
-    $folder = sanitizeFileName($folder);
-    $dir = ROOT."/file/cache/$folder/";
+    //$folder = sanitizeFileName($folder);
+    $dir = $folder;
 
     if (!is_dir($dir)) {
         mkdir($dir, 0777, true);

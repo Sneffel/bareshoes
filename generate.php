@@ -17,32 +17,75 @@ $processedArray = array_map(function($file) {
         'price' => 49,
         'priceCents' => 99,
         'description' => "Perfect for walking, everyday life",
-        'sizings' => range(41, 45)
+        'sizings' => range(41, 45),
+        'rating' => number_format(rand(450, 500) / 100, 2)
     ];
 }, $files);
 
-$textarea = '';
+$usersDirectory = 'assets/users/';
+$fileCount = count(glob($usersDirectory . '*.json'));
+$requiredUsers = count($processedArray)*4;
 
+if ($fileCount < $requiredUsers) {
+    $neededUsers = $requiredUsers - $fileCount;
+    for ($i = 0; $i < $neededUsers; $i++) {
+        cachejson($fileCount + $i , 'https://randomuser.me/api/', $usersDirectory);
+    }
+}
+
+
+$userJSONs = glob($usersDirectory . '*.json');
+
+foreach($userJSONs as $fileName => $userJSON){
+    $userData = json_decode(file_get_contents($userJSON), true);
+    if(isset($userData['results'][0]['location'])){
+        unset(
+            $userData['results'][0]['location'],
+            $userData['results'][0]['login'],
+            $userData['results'][0]['email'],
+            $userData['results'][0]['dob'],
+            $userData['results'][0]['registered'],
+            $userData['results'][0]['phone'],
+            $userData['results'][0]['cell'],
+            $userData['results'][0]['id'],
+            $userData['info']
+        );
+        
+    }
+    file_put_contents("assets/users/$fileName.json", json_encode($userData));
+    //echo $fileName;
+    vdp($userData);
+
+}
+
+
+
+$textarea = '';
 foreach ($processedArray as $product){
-    
-    $textarea .= '
-    <div class="container mb-2">
-    <div class="d-md-flex bg-secondary bg-opacity-50 p-4 position-relative">
-        <div class="me-4 mb-4 mb-md-0">
-            <img src="img/'.$product['img'].'" alt="'.$product['name'].'" height="180">
-            <div class="position-absolute price">
-                <span class="">'.$product['price'].'</span><span class="fs-4 fraction">'.$product['priceCents'].'€</span>
+    $hiddenStar = 100 - (explode('.',$product['rating'])[1]);
+    //$textarea .= $product['rating'] . " => hidden = $hiddenStar";
+    $textarea .= '<div class="container mb-2">
+        <div class="d-md-flex bg-secondary bg-opacity-50 p-4 position-relative">
+            <div class="me-4 mb-4 mb-md-0">
+                <img src="img/'.$product['img'].'" alt="'.$product['name'].'" height="180">
+                <div class="position-absolute price">
+                    <span class="">'.$product['price'].'</span><span class="fs-4 fraction">'.$product['priceCents'].'€</span>
+                </div>
+            </div>
+            <div>
+                <h2>'.$product['name'].'</h2>
+                <p class="fw-bold fs-5 mb-0 mb-md-2">'.$product['description'].'</p>
+                <div class="stars">
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning" style="mask-image: linear-gradient(to left, transparent '.$hiddenStar.'%, black '.$hiddenStar.'%, black 100%)"></i>
+                </div>
             </div>
         </div>
-        <div>
-            <h2>'.$product['name'].'</h2>
-            <p class="fw-bold fs-5 mb-0 mb-md-2">'.$product['description'].'</p>
-            <div class="stars">
-                <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
-            </div>
-        </div>
-    </div>
-</div>';
+    </div>';
+
 }
 
 
