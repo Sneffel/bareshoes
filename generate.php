@@ -65,9 +65,9 @@ foreach ($processedArray as $product){
     $hiddenStar = 100 - (explode('.',$product['rating'])[1]);
     //$textarea .= $product['rating'] . " => hidden = $hiddenStar";
     $textarea .= '<div class="container mb-2">
-        <div class="d-md-flex bg-secondary bg-opacity-50 p-4 position-relative">
+        <div class="d-md-flex bg-secondary bg-opacity-50 p-4 position-relative rounded">
             <div class="me-4 mb-4 mb-md-0">
-                <img src="img/'.$product['img'].'" alt="'.$product['name'].'" height="180">
+                <img src="img/'.$product['img'].'" alt="'.$product['name'].'" height="180" class="rounded">
                 <div class="position-absolute price">
                     <span class="">'.$product['price'].'</span><span class="fs-4 fraction">'.$product['priceCents'].'€</span>
                 </div>

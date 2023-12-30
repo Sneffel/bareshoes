@@ -112,9 +112,16 @@ div.radios {
     color: white;
     margin-right: 5px;
     cursor: pointer;
-    border: 3px solid transparent;
     flex-grow: 1;
     user-select: none;
+}
+.radios>label:last-child {
+    margin-right: 0;
+}
+
+input[type="radio"]+label {
+    outline: 0px solid #ffc439;
+    transition: outline 0.25s ease-in-out;
 }
 
 /* Style for the selected radio button */
@@ -122,4 +129,11 @@ input[type="radio"]:checked+label {
     outline: 6px solid #ffc439;
     /* Change border color when selected */
     z-index: 2;
+}
+
+.max-vw-50{
+    max-width: 50vw;
+}
+.max-vw-80{
+    max-width: 80vw;
 }
