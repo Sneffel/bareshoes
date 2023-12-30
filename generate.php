@@ -7,10 +7,12 @@ $files = array_map('pathinfo', glob('img/*.*'));
 
 $processedArray = array_map(function($file) {
     $imageName = $file['basename'];
-    $nameParts = explode('_', pathinfo($file['filename'], PATHINFO_FILENAME));
+    $code = pathinfo($file['filename'], PATHINFO_FILENAME);
+    $nameParts = explode('_', $code);
     $formattedName = ucfirst($nameParts[0]) . ', ' . $nameParts[1];
 
     return [
+        'code' => $code,
         'img' => $imageName,
         'brand' => 'Hobibear',
         'name' => $formattedName,
@@ -63,28 +65,50 @@ foreach($userJSONs as $fileName => $userJSON){
 $textarea = '';
 foreach ($processedArray as $product){
     $hiddenStar = 100 - (explode('.',$product['rating'])[1]);
+    $urlProductPage = 'items/'.$product['code'].'.html';
     //$textarea .= $product['rating'] . " => hidden = $hiddenStar";
     $textarea .= '<div class="container mb-2">
-        <div class="d-md-flex bg-secondary bg-opacity-50 p-4 position-relative rounded">
-            <div class="me-4 mb-4 mb-md-0">
-                <img src="img/'.$product['img'].'" alt="'.$product['name'].'" height="180" class="rounded">
-                <div class="position-absolute price">
-                    <span class="">'.$product['price'].'</span><span class="fs-4 fraction">'.$product['priceCents'].'€</span>
+        <a href="'.$urlProductPage.'" class="text-decoration-none text-reset">
+            <div class="d-md-flex bg-secondary bg-opacity-50 p-4 position-relative rounded">
+                <div class="me-4 mb-4 mb-md-0">
+                    <img src="img/'.$product['img'].'" alt="'.$product['name'].'" height="180" class="rounded">
+                    <div class="position-absolute price">
+                        <span class="">'.$product['price'].'</span><span class="fs-4 fraction">'.$product['priceCents'].'€</span>
+                    </div>
+                </div>
+                <div>
+                    <h2>'.$product['name'].'</h2>
+                    <p class="fw-bold fs-5 mb-0 mb-md-2">'.$product['description'].'</p>
+                    <div class="stars">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning" style="mask-image: linear-gradient(to left, transparent '.$hiddenStar.'%, black '.$hiddenStar.'%, black 100%)"></i>
+                    </div>
                 </div>
             </div>
-            <div>
-                <h2>'.$product['name'].'</h2>
-                <p class="fw-bold fs-5 mb-0 mb-md-2">'.$product['description'].'</p>
-                <div class="stars">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning" style="mask-image: linear-gradient(to left, transparent '.$hiddenStar.'%, black '.$hiddenStar.'%, black 100%)"></i>
-                </div>
-            </div>
-        </div>
+        </a>
     </div>';
+
+    $sizings = '';
+    foreach ($product['sizings'] as $size){
+        $sizings .= '<input type="radio" id="radio'.$size.'" name="number" value="'.$size.'">'.
+                    '<label for="radio'.$size.'" class="text-bg-danger rounded">'.$size.'</label>';
+    }
+
+    $template = file_get_contents('items/demo.html');
+    $fullContent = str_replace('{brand}', $product['brand'], $template);
+    $fullContent = str_replace('{name}', $product['name'], $fullContent);
+    $fullContent = str_replace('{title}', $product['name']. "by Bare Foot Shop", $fullContent);
+    $fullContent = str_replace('{img}', $product['img'], $fullContent);
+    $fullContent = str_replace('{sizings}', $sizings, $fullContent);
+    $fullContent = str_replace('{price}', $product['price'], $fullContent);
+    $fullContent = str_replace('{priceCents}', $product['priceCents'], $fullContent);
+
+    file_put_contents($urlProductPage, $fullContent);
+
+
 
 }
 
