@@ -1,9 +1,14 @@
+
+<title>GENERATE, UPDATE PAGES</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
 <?php
 require 'sys/funz.php';
 
-$files = array_map('pathinfo', glob('img/*.*'));
+$imageFiles = array_map('pathinfo', glob('img/*.*'));
+
+$reviewsArray = array_map('trim', explode(PHP_EOL, file_get_contents('assets/reviews.txt')));
+//vdp($reviewsArray);
 
 $processedArray = array_map(function($file) {
     $imageName = $file['basename'];
@@ -22,7 +27,7 @@ $processedArray = array_map(function($file) {
         'sizings' => range(41, 45),
         'rating' => number_format(rand(450, 500) / 100, 2)
     ];
-}, $files);
+}, $imageFiles);
 
 $usersDirectory = 'assets/users/';
 $fileCount = count(glob($usersDirectory . '*.json'));
@@ -37,8 +42,10 @@ if ($fileCount < $requiredUsers) {
 
 
 $userJSONs = glob($usersDirectory . '*.json');
+$userJSONsOutput = [];
+foreach($userJSONs as $userJSON){
+    $fileName = pathinfo($userJSON, PATHINFO_FILENAME);
 
-foreach($userJSONs as $fileName => $userJSON){
     $userData = json_decode(file_get_contents($userJSON), true);
     if(isset($userData['results'][0]['location'])){
         unset(
@@ -52,18 +59,21 @@ foreach($userJSONs as $fileName => $userJSON){
             $userData['results'][0]['id'],
             $userData['info']
         );
-        
     }
+    $userData['review'] = [
+        'text' => $reviewsArray[$fileName],
+        'rating' => number_format((rand(1, 10) > 2 ? 5 : (rand(1, 10) > 2 ? 4.5 : 4)), 1),
+        'date' => date('d M Y', mt_rand(strtotime('-1 year'), time()))
+    ];
     file_put_contents("assets/users/$fileName.json", json_encode($userData));
-    //echo $fileName;
-    vdp($userData);
-
+    //echo $fileName; // no extension :))
+    $userJSONsOutput[] = $userData;
 }
-
+//vdp($userJSONsOutput);
 
 
 $textarea = '';
-foreach ($processedArray as $product){
+foreach ($processedArray as $id => $product){
     $hiddenStar = 100 - (explode('.',$product['rating'])[1]);
     $urlProductPage = 'items/'.$product['code'].'.html';
     //$textarea .= $product['rating'] . " => hidden = $hiddenStar";
@@ -97,7 +107,7 @@ foreach ($processedArray as $product){
                     '<label for="radio'.$size.'" class="text-bg-danger rounded">'.$size.'</label>';
     }
 
-    $template = file_get_contents('items/demo.html');
+    $template = file_get_contents('items/_item_template.html');
     $fullContent = str_replace('{brand}', $product['brand'], $template);
     $fullContent = str_replace('{name}', $product['name'], $fullContent);
     $fullContent = str_replace('{title}', $product['name']. "by Bare Foot Shop", $fullContent);
@@ -105,6 +115,44 @@ foreach ($processedArray as $product){
     $fullContent = str_replace('{sizings}', $sizings, $fullContent);
     $fullContent = str_replace('{price}', $product['price'], $fullContent);
     $fullContent = str_replace('{priceCents}', $product['priceCents'], $fullContent);
+
+    $reviews = ''; // 4
+    $startIndex = $id * 4;
+    $selectedJSONs = array_slice($userJSONsOutput, $startIndex, 4);
+    echo "ID: $id, startIndex: $startIndex<br>";
+
+    foreach($selectedJSONs as $index => $userContent){
+    //vdp($userContent);break(2);
+        $firstName = $userContent['results'][0]['name']['first'];
+        echo "$firstName<br>";
+        $rating = $userContent['review']['rating'];
+       // echo "RATING: $rating";
+        if($rating == "4"){
+            $classStar = 'star';
+        }elseif($rating = "4.5"){
+            $classStar = 'star-half';
+        }else{
+            $classStar = 'star-fill';
+        }
+
+        $reviews .= '<section class="row">
+        <div class="col-auto">
+            <img src="'.$userContent['results'][0]['picture']['thumbnail'].'" alt="Avatar '.$firstName.'"
+                class="rounded-circle pe-none user-select-none">
+        </div>
+        <div class="col">
+            <div class="fw-400">'.$firstName.' '.$userContent['results'][0]['name']['last'].'</div>
+            <div class="fw-300">'.$userContent['review']['date'].'</div>
+            <div class="stars small">
+                <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i
+                    class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i
+                    class="bi bi-'.$classStar.' text-warning"></i>
+            </div>
+            <div>' . $userContent['review']['text'] . '</div>';
+        $reviews .= ($index < 3) ? '<hr>' : '';
+        $reviews .= '</div></section>';
+    }
+    $fullContent = str_replace('{reviews}', $reviews, $fullContent);
 
     file_put_contents($urlProductPage, $fullContent);
 

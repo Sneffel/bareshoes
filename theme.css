@@ -8,7 +8,9 @@ p, h1, h2, h3, div, span, a, li, td, th, strong, em, small, big, i, b, u, s, sub
     transition: color 0.5s ease;
 }
 */
-
+#theme-switcher{
+    font-size: 1.75em;
+}
 #logo{
     position: relative;
     top:5px;
@@ -31,7 +33,7 @@ h2{
     font-family: 'Jost', sans-serif;
     font-weight: 700;
 }
-.bi-star-fill, bi-star-half{
+.bi-star-fill, .bi-star-half, .bi-star{
     font-size: 2em;
 }
 .price{
@@ -103,7 +105,7 @@ div.radios {
     width: 100%;
 }
 
-.radios>label {
+.radios > label {
     display: flex;
     align-items: center;
     justify-content: center;
