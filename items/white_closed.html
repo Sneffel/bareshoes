@@ -75,7 +75,7 @@
         </div>
         <div class="col">
             <div class="fw-400">Aiden Green</div>
-            <div class="fw-300">27 Dec 2023</div>
+            <div class="fw-300">17 Jul 2023</div>
             <div class="stars small">
                 <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i
                     class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i
@@ -88,7 +88,7 @@
         </div>
         <div class="col">
             <div class="fw-400">Gina Bowman</div>
-            <div class="fw-300">22 Aug 2023</div>
+            <div class="fw-300">26 Jan 2023</div>
             <div class="stars small">
                 <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i
                     class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i
@@ -101,7 +101,7 @@
         </div>
         <div class="col">
             <div class="fw-400">سام رضاییان</div>
-            <div class="fw-300">24 May 2023</div>
+            <div class="fw-300">02 Jan 2023</div>
             <div class="stars small">
                 <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i
                     class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i
@@ -114,7 +114,7 @@
         </div>
         <div class="col">
             <div class="fw-400">Vidar Nicolaisen</div>
-            <div class="fw-300">23 Oct 2023</div>
+            <div class="fw-300">21 Nov 2023</div>
             <div class="stars small">
                 <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i
                     class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i
@@ -147,58 +147,60 @@
     <script src="../sys/theme.js"></script>
 
     <script
-        src="https://www.paypal.com/sdk/js?client-id=ASrsqpxWgqokB7MQ7vKtclqmavJLmDmECqQlvxNBaN71H-TQKLSdRrSSmEBQmpx8wOLwhIMWuY2yIGKW&currency=EUR"></script>
+        src="https://www.paypal.com/sdk/js?client-id=AUiFDEnpGyXPS3_BkgG18DUS5gmTIVmdLGc11CC_SE734jCPbKauIjzMkJEeJjgYlJmxHDwsPRgxbijP&currency=EUR"></script>
 
-        <script>
-            var selectedSize; // Declare selectedSize outside the event listener
-        
-            document.addEventListener("DOMContentLoaded", function () {
-                var sizeSelector = document.getElementById("sizeselector");
-        
-                // Check if any radio button is already checked on page load
-                var checkedRadio = document.querySelector('input[name="number"]:checked');
-                if (checkedRadio) {
-                    selectedSize = checkedRadio.value;
-                    console.log("Selected Size on Page Load: " + selectedSize);
-                }
-        
-                sizeSelector.addEventListener("change", function () {
-                    selectedSize = document.querySelector('input[name="number"]:checked').value;
-                    console.log("Selected Size: " + selectedSize);
-                });
-        
-                paypal.Buttons({
-                    createOrder: function (data, actions) {
-                        // Ensure selectedSize is defined here
-                        if (!selectedSize) {
-                            console.error("Please select a size before proceeding.");
-                            return null; // Return null to prevent the order creation
-                        }
-        
-                        return actions.order.create({
-                            purchase_units: [{
-                                amount: {
-                                    value: '49.99',
-                                },
-                                description: 'Shoe Size: ' + selectedSize + ', Shoe Model: Hobibear White, closed',
-                            }],
-        
-                            application_context: {
-                                user_action: 'PAY_NOW',
-                                payment_method: {
-                                    payee_preferred: 'IMMEDIATE_PAYMENT_REQUIRED'
-                                }
-                            }
-                        });
-                    },
-                    onApprove: function (data, actions) {
-                        return actions.order.capture().then(function (details) {
-                            window.location.href = '../thank_you.html';
-                        });
-                    }
-                }).render('#paypal-button-container');
+    <script>
+        var selectedSize; // Declare selectedSize outside the event listener
+    
+        document.addEventListener("DOMContentLoaded", function () {
+            var sizeSelector = document.getElementById("sizeselector");
+    
+            // Check if any radio button is already checked on page load
+            var checkedRadio = document.querySelector('input[name="number"]:checked');
+            if (checkedRadio) {
+                selectedSize = checkedRadio.value;
+                console.log("Selected Size on Page Load: " + selectedSize);
+            }
+    
+            sizeSelector.addEventListener("change", function () {
+                selectedSize = document.querySelector('input[name="number"]:checked').value;
+                console.log("Selected Size: " + selectedSize);
             });
-        </script>
+    
+            paypal.Buttons({
+                createOrder: function (data, actions) {
+                    // Ensure selectedSize is defined here
+                    if (!selectedSize) {
+                        console.error("Please select a size before proceeding.");
+                        return null; // Return null to prevent the order creation
+                    }
+    
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: '49.99',
+                            },
+                            description: 'Shoe Size: ' + selectedSize + ', Shoe Model: Hobibear White, closed',
+                        }],
+    
+                        application_context: {
+                            user_action: 'PAY_NOW',
+                            payment_method: {
+                                payee_preferred: 'UNRESTRICTED'
+                            },
+                            return_url: 'https://bareshoes.shop/thank_you.html',
+                            cancel_url: 'https://bareshoes.shop/'
+                        }
+                    });
+                },
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (details) {
+                        window.location.href = '../thank_you.html';
+                    });
+                }
+            }).render('#paypal-button-container');
+        });
+    </script>
         
         
 </body>
