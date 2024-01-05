@@ -4,6 +4,7 @@
 
 <?php
 require 'sys/funz.php';
+require 'sys/content.php';
 
 $imageFiles = array_map('pathinfo', glob('img/*.*'));
 
@@ -110,7 +111,7 @@ foreach ($processedArray as $id => $product){
     $template = file_get_contents('items/_item_template.html');
     $fullContent = str_replace('{brand}', $product['brand'], $template);
     $fullContent = str_replace('{name}', $product['name'], $fullContent);
-    $fullContent = str_replace('{title}', $product['name']. " by Bare Foot Shop", $fullContent);
+    $fullContent = str_replace('{title}', $product['name']. " by Bare Shoes Shopping", $fullContent);
     $fullContent = str_replace('{img}', $product['img'], $fullContent);
     $fullContent = str_replace('{sizings}', $sizings, $fullContent);
     $fullContent = str_replace('{price}', $product['price'], $fullContent);
@@ -119,12 +120,12 @@ foreach ($processedArray as $id => $product){
     $reviews = ''; // 4
     $startIndex = $id * 4;
     $selectedJSONs = array_slice($userJSONsOutput, $startIndex, 4);
-    echo "ID: $id, startIndex: $startIndex<br>";
+    //echo "ID: $id, startIndex: $startIndex<br>";
 
     foreach($selectedJSONs as $index => $userContent){
     //vdp($userContent);break(2);
         $firstName = $userContent['results'][0]['name']['first'];
-        echo "$firstName<br>";
+        //echo "$firstName<br>";
         $rating = $userContent['review']['rating'];
        // echo "RATING: $rating";
         if($rating == "4"){
@@ -160,15 +161,21 @@ foreach ($processedArray as $id => $product){
 
 }
 
+$filename = 'index.html';
+$tinyHTML = minify_html($textarea);
+file_put_contents($filename, preg_replace('/<!-- content -->(.*?)<!-- \/content -->/s', '<!-- content -->' . $tinyHTML . '<!-- /content -->', file_get_contents($filename)));
+
+echo 'Content inserted successfully.';
+
+
 
 ?>
-<textarea id="copy"><?=minify_html($textarea)?></textarea>
-<button onclick="copyText()">Copy Text</button>
+
 
 
 <?php
-echo $textarea;
-vdp($processedArray);
+//echo $textarea;
+//vdp($processedArray);
 ?>
 <script>
 function copyText() {
@@ -184,3 +191,53 @@ function copyText() {
     }, 3000);
 }
 </script>
+
+
+<?php
+
+// LEGAL
+
+
+preg_match('/<!-- page top -->(.*?)<!-- \/page top -->/s', file_get_contents('index.html'), $matches);
+
+$pageTop = '';
+if (isset($matches[1])) {
+    $pageTop = $matches[1];
+} else {
+    echo "<h1>Custom tags not found or content is empty!<h1>";
+}
+
+
+$files = glob('legal/*.html');
+
+$indexName = 'legal-pages-index';
+$templateIndexFile = "legal/$indexName.bak";
+$fileExtended = array_merge($files, [$templateIndexFile]);
+//vdp($fileExtended);
+$links = '';
+foreach ($fileExtended as $file) {
+    $content = file_get_contents($file);
+    $fileName = pathinfo($file, PATHINFO_FILENAME);
+    $niceTitle = titleCase(str_replace('-', ' ', $fileName));
+    $titleHtml = "<title>$niceTitle - Bare Shoes Shopping</title>";
+    //echo "$niceTitle - $fileName<br>";
+    $content = str_replace('{head}', $headText.$titleHtml, $content);
+
+    $content = str_replace('{scripts}', $scriptsText, $content);
+    $content = str_replace('{pagetop}', $pageTop, $content);
+    $content = str_replace('".', '"..', $content);
+
+    file_put_contents("legal/$fileName", $content);
+    if($fileName == $indexName){
+        continue;
+    }
+    $links.= "<li><a class=\"text-decoration-none\" href=\"$fileName\">$niceTitle</a></li>";
+
+}
+
+//echo $links;
+
+$content = file_get_contents("legal/$indexName");
+$content = str_replace('{content}', "<ul>$links</ul>", $content);
+// $content = str_replace('Template_index', "Legal Pages Index", $content);
+file_put_contents("legal/$fileName", $content);
