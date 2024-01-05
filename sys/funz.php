@@ -200,3 +200,19 @@ function minify_html($html){
     $html = preg_replace($search,$replace,$html);
     return $html;
 }
+
+
+
+function titleCase($str, $excludeWords = ['and','the', 'of', 'in','for', 'a', 'an', 'but','or']) {
+  $words = preg_split('/\s+/', $str);
+
+  foreach ($words as &$word) {
+      $lowercaseWord = strtolower($word);
+
+      if (!in_array($lowercaseWord, $excludeWords)) {
+          $word = ucfirst($lowercaseWord);
+      }
+  }
+
+  return implode(' ', $words);
+}
