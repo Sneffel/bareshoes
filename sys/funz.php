@@ -216,3 +216,8 @@ function titleCase($str, $excludeWords = ['and','the', 'of', 'in','for', 'a', 'a
 
   return implode(' ', $words);
 }
+
+
+function replaceCommentsTag($filename, $content, $tag){
+  file_put_contents($filename, preg_replace('/<!-- '.$tag.' -->(.*?)<!-- \/'.$tag.' -->/s', '<!-- '.$tag.' -->' . $content . '<!-- /'.$tag.' -->', file_get_contents($filename)));
+}
