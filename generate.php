@@ -231,13 +231,15 @@ foreach ($fileExtended as $file) {
     if($fileName == $indexName){
         continue;
     }
-    $links.= "<li><a class=\"text-decoration-none\" href=\"$fileName\">$niceTitle</a></li>";
+    $links.= "<a class=\"list-group-item list-group-item-action\" href=\"$fileName\">$niceTitle</a>";
 
 }
 
 //echo $links;
 
 $content = file_get_contents("legal/$indexName");
-$content = str_replace('{content}', "<ul>$links</ul>", $content);
+$content = str_replace('{content}', "$links", $content);
 // $content = str_replace('Template_index', "Legal Pages Index", $content);
 file_put_contents("legal/$fileName", $content);
+
+rename("legal/$indexName", "legal/index.html");
