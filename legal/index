@@ -32,7 +32,7 @@
             <h1>Legal Pages Index</h1>
         </div>
         <div class="list-group">
-        <ul class="list-group-item list-group-item-action"><li><a class="text-decoration-none" href="compliance">Compliance</a></li><li><a class="text-decoration-none" href="contacts">Contacts</a></li><li><a class="text-decoration-none" href="copyright">Copyright</a></li><li><a class="text-decoration-none" href="disclaimer">Disclaimer</a></li><li><a class="text-decoration-none" href="index">Index</a></li><li><a class="text-decoration-none" href="privacy-policy">Privacy Policy</a></li><li><a class="text-decoration-none" href="returns-and-refunds">Returns and Refunds</a></li><li><a class="text-decoration-none" href="shipping-and-delivery">Shipping and Delivery</a></li></ul>
+        <a class="list-group-item list-group-item-action" href="compliance">Compliance</a><a class="list-group-item list-group-item-action" href="contacts">Contacts</a><a class="list-group-item list-group-item-action" href="copyright">Copyright</a><a class="list-group-item list-group-item-action" href="disclaimer">Disclaimer</a><a class="list-group-item list-group-item-action" href="privacy-policy">Privacy Policy</a><a class="list-group-item list-group-item-action" href="returns-and-refunds">Returns and Refunds</a><a class="list-group-item list-group-item-action" href="shipping-and-delivery">Shipping and Delivery</a>
         </div>
     </div>
 <script src=".../sys/theme.js"></script>

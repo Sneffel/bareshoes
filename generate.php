@@ -228,7 +228,7 @@ foreach ($fileExtended as $file) {
     $content = str_replace('".', '"..', $content);
 
     file_put_contents("legal/$fileName", $content);
-    if($fileName == $indexName){
+    if($fileName == $indexName || $fileName == "index"){
         continue;
     }
     $links.= "<a class=\"list-group-item list-group-item-action\" href=\"$fileName\">$niceTitle</a>";
