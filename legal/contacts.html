@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {head}
+</head>
+
+<body>
+    {pagetop}
+
+
+    <div class="container">
+        <h1>Contact Information</h1>
+        <p>If you have any questions, concerns, or feedback regarding our services, please contact us at:</p>
+    
+        <div id="emailContainer" style="display: none;">
+            <p>Email: <span id="assembledEmail"></span></p>
+        </div>
+    
+        <div id="sumContainer">
+            <div class="pb-1" id="sumQuestion"></div>
+            <form onsubmit="event.preventDefault();checkSum()" class="input-group">
+                <input type="text" id="sumInput" placeholder="Your answer" class="form-control" autofocus inputmode="numeric">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            
+            
+        </div>
+    
+        <script>
+            var user = "support";
+            var domain = "bareshoes.shop";
+            var correctSum;
+            var assembledEmail = user + "@" + domain;
+    
+            function showEmail() {
+                document.getElementById("emailContainer").style.display = "block";
+                document.getElementById("sumContainer").style.display = "none";
+                document.getElementById("assembledEmail").innerHTML = '<a href="mailto:' + assembledEmail + '">' + assembledEmail + '</a>';
+            }
+    
+            function generateRandomNumbers() {
+                var number1 = Math.floor(Math.random() * 6); // Random number between 0 and 5
+                var number2 = Math.floor(Math.random() * 6); // Random number between 0 and 5
+                return { number1, number2 };
+            }
+    
+            function displayRandomSum() {
+                var randomNumbers = generateRandomNumbers();
+                correctSum = randomNumbers.number1 + randomNumbers.number2;
+                console.log(randomNumbers.number1 + " + " + randomNumbers.number2 + " = "+ correctSum)
+    
+                document.getElementById("sumQuestion").innerText = "Calculate the sum of " + randomNumbers.number1 + " + " + randomNumbers.number2 + ":";
+                document.getElementById("sumInput").select();
+                return correctSum;
+            }
+    
+            function checkSum() {
+                var userAnswer = parseInt(document.getElementById("sumInput").value);
+                console.log("User:",userAnswer," but corect:",correctSum)
+                if (!isNaN(userAnswer) && userAnswer === correctSum) {
+                    // Show the hidden email after correct sum
+                    showEmail();
+                } else {
+                    alert("Incorrect sum. Please try again.");
+                    document.getElementById("sumInput").select();
+                }
+            }
+    
+            displayRandomSum();
+        </script>
+        </div>
+{scripts}
+</body>
+
+</html>
