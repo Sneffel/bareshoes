@@ -139,3 +139,9 @@ input[type="radio"]:checked+label {
 .max-vw-80{
     max-width: 80vw;
 }
+.w-max{
+    width: max-content;
+}
+.w-min{
+    width: min-content;
+}
