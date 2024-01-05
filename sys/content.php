@@ -13,3 +13,20 @@ $headText = '<meta charset="UTF-8">
 
 
 $scriptsText = '<script src="./sys/theme.js"></script>';
+
+define('FOOTER',
+'<footer class="d-flex flex-wrap justify-content-between align-items-center p-3 mt-5 border-top">
+<p class="col-md-4 mb-0 text-muted">© 2024 Bare Shoes Shopping, Inc</p>
+
+<a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+  <img src="/assets/Logo.svg" alt=Logo height=40>
+</a>
+
+<ul class="nav col-md-4 justify-content-end">
+  <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+  <li class="nav-item"><a href="/legal/" class="nav-link px-2 text-muted">Legal</a></li>
+  <!--<li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+  <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+  <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>-->
+</ul>
+</footer>');

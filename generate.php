@@ -243,3 +243,5 @@ $content = str_replace('{content}', "$links", $content);
 file_put_contents("legal/$fileName", $content);
 
 rename("legal/$indexName", "legal/index.html");
+
+replaceCommentsTag('index.html', FOOTER, 'footer');
