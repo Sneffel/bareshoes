@@ -16,11 +16,10 @@
 
 <body>
     
-    <div id="theme-switcher" class="position-absolute top-0 end-0 p-2" role="button">
-        <i id="theme-icon" class="bi bi-sun"></i>
-    </div>
-
-    <div class="container-fluid text-center">
+    <div class="container-fluid text-center pb-1" style="position: sticky;top:0;background-color: inherit;z-index: 3;">
+        <div id="theme-switcher" class="position-absolute top-0 end-0 p-2" role="button">
+            <i id="theme-icon" class="bi bi-sun"></i>
+        </div>
         <a href="../" class="text-decoration-none text-reset">
             <img src="../assets/Logo.svg" alt="Logo" height="60" class="p-2 pb-0 pb-sm-2 d-sm-flex" id="logo">
             <h1 class="text-uppercase">Bare•Shop</h1>
@@ -29,7 +28,12 @@
     
 
     <div class="container">
-        <ul><li><a class="text-decoration-none" href="compliance">Compliance</a></li><li><a class="text-decoration-none" href="contacts">Contacts</a></li><li><a class="text-decoration-none" href="copyright">Copyright</a></li><li><a class="text-decoration-none" href="disclaimer">Disclaimer</a></li><li><a class="text-decoration-none" href="privacy-policy">Privacy Policy</a></li><li><a class="text-decoration-none" href="returns-and-refunds">Returns and Refunds</a></li><li><a class="text-decoration-none" href="shipping-and-delivery">Shipping and Delivery</a></li></ul>
+        <div class="text-center">
+            <h1>Legal Pages Index</h1>
+        </div>
+        <div class="list-group">
+        <a class="list-group-item list-group-item-action" href="compliance">Compliance</a><a class="list-group-item list-group-item-action" href="contacts">Contacts</a><a class="list-group-item list-group-item-action" href="copyright">Copyright</a><a class="list-group-item list-group-item-action" href="disclaimer">Disclaimer</a><a class="list-group-item list-group-item-action" href="index">Index</a><a class="list-group-item list-group-item-action" href="privacy-policy">Privacy Policy</a><a class="list-group-item list-group-item-action" href="returns-and-refunds">Returns and Refunds</a><a class="list-group-item list-group-item-action" href="shipping-and-delivery">Shipping and Delivery</a>
+        </div>
     </div>
 <script src="../sys/theme.js"></script>
 </body>

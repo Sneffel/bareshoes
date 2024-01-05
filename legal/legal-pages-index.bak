@@ -9,7 +9,12 @@
     {pagetop}
 
     <div class="container">
+        <div class="text-center">
+            <h1>Legal Pages Index</h1>
+        </div>
+        <div class="list-group">
         {content}
+        </div>
     </div>
 {scripts}
 </body>
