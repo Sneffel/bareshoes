@@ -19,7 +19,7 @@ define('FOOTER',
 <p class="col-md-4 mb-0 text-muted">© 2024 Bare Shoes Shopping, Inc</p>
 
 <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-  <img src="/assets/Logo.svg" alt=Logo height=40>
+  <img src="/assets/Logo.svg" alt=Logo height=40 class=logo>
 </a>
 
 <ul class="nav col-md-4 justify-content-end">
