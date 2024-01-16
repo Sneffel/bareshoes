@@ -1,7 +1,7 @@
 // script.js
 const themeSwitcher = document.getElementById('theme-switcher');
 const themeIcon = document.getElementById('theme-icon');
-const logo = document.querySelector('#logo, .logo');
+const logos = document.querySelectorAll('#logo, .logo');
 
 // Check the saved theme preference
 const currentTheme = localStorage.getItem('theme');
@@ -29,5 +29,7 @@ function updateThemeIcon(theme) {
 
 // Function to invert logo colors
 function invertLogoColors(theme) {
-    logo.style.filter = theme === 'dark' ? 'invert(1)' : 'invert(0)';
+    logos.forEach(logo => {
+        logo.style.filter = theme === 'dark' ? 'invert(1)' : 'invert(0)';
+    });
 }
