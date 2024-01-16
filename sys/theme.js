@@ -1,7 +1,7 @@
 // script.js
 const themeSwitcher = document.getElementById('theme-switcher');
 const themeIcon = document.getElementById('theme-icon');
-const logo = document.getElementById('logo'); // Assuming the logo has an id of 'logo'
+const logo = document.querySelector('#logo, .logo');
 
 // Check the saved theme preference
 const currentTheme = localStorage.getItem('theme');
