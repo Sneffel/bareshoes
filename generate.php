@@ -225,19 +225,19 @@ foreach ($fileExtended as $file) {
 
     $content = str_replace('{scripts}', $scriptsText, $content);
     $content = str_replace('{pagetop}', $pageTop, $content);
-    $content = str_replace('".', '"..', $content);
+    //$content = str_replace('".....', '"..', $content);
 
-    file_put_contents("legal/$fileName", $content);
+    file_put_contents("legal/$fileName.html", $content);
     if($fileName == $indexName || $fileName == "index"){
         continue;
     }
-    $links.= "<a class=\"list-group-item list-group-item-action\" href=\"$fileName\">$niceTitle</a>";
+    $links.= "<a class=\"list-group-item list-group-item-action\" href=\"$fileName.html\">$niceTitle</a>";
 
 }
 
 //echo $links;
 
-$content = file_get_contents("legal/$indexName");
+$content = file_get_contents("legal/$indexName.html");
 $content = str_replace('{content}', "$links", $content);
 // $content = str_replace('Template_index', "Legal Pages Index", $content);
 file_put_contents("legal/$fileName", $content);
