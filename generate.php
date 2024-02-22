@@ -226,8 +226,12 @@ foreach ($fileExtended as $file) {
     $content = str_replace('{scripts}', $scriptsText, $content);
     $content = str_replace('{pagetop}', $pageTop, $content);
     //$content = str_replace('".....', '"..', $content);
-
+    #$content = str_replace("</body>","<!-- footer --><!-- /footer --></body>",$content);
+    
+    
     file_put_contents("legal/$fileName.html", $content);
+    replaceCommentsTag("legal/$fileName.html", FOOTER, 'footer');
+
     if($fileName == $indexName || $fileName == "index"){
         continue;
     }
@@ -238,8 +242,8 @@ foreach ($fileExtended as $file) {
 //echo $links;
 
 $content = file_get_contents("legal/$indexName.html");
-$content = str_replace('{content}', "$links", $content);
-// $content = str_replace('Template_index', "Legal Pages Index", $content);
+$content = str_replace('{content}', $links, $content);
+$content = str_replace('./', "../", $content);
 file_put_contents("legal/$fileName", $content);
 
 rename("legal/$indexName", "legal/index.html");

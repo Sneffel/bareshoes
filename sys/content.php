@@ -15,7 +15,7 @@ $headText = '<meta charset="UTF-8">
 $scriptsText = '<script src="./sys/theme.js"></script>';
 
 define('FOOTER',
-'<footer class="d-flex flex-wrap justify-content-between align-items-center p-3 mt-5 border-top">
+'<footer class="d-flex flex-wrap justify-content-between align-items-center p-3 mt-5 border-top mt-auto">
 <p class="col-md-4 mb-0 text-muted">© 2024 Bare Shoes Shopping, Inc</p>
 
 <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
