@@ -86,10 +86,10 @@
             $hiddenStar = 100 - (explode('.', $product['rating'])[1]);
             $urlProductPage = 'items/' . $product['code'] . '.html';
             //$textarea .= $product['rating'] . " => hidden = $hiddenStar";
-            $textarea .= '<div class="container mb-2">
+            $textarea .= '<div class="item">
         <a href="' . $urlProductPage . '" class="text-decoration-none text-reset">
-            <div class="d-md-flex bg-secondary bg-opacity-50 p-4 position-relative rounded">
-                <div class="me-4 mb-4 mb-md-0">
+            <div class="d-lg-flex bg-secondary bg-opacity-50 p-4 position-relative rounded">
+                <div class="me-4 mb-4 mb-lg-0">
                     <img src="img/' . $product['img'] . '" alt="' . $product['name'] . '" height="180" class="rounded">
                     <div class="position-absolute price">
                         <span class="">' . $product['price'] . '</span><span class="fs-4 fraction">' . $product['priceCents'] . '€</span>
@@ -97,7 +97,7 @@
                 </div>
                 <div>
                     <h2>' . $product['name'] . '</h2>
-                    <p class="fw-bold fs-5 mb-0 mb-md-2">' . $product['description'] . '</p>
+                    <p class="fw-bold fs-5 mb-0 mb-lg-2">' . $product['description'] . '</p>
                     <div class="stars">
                         <i class="bi bi-star-fill text-warning"></i>
                         <i class="bi bi-star-fill text-warning"></i>

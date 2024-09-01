@@ -21,9 +21,8 @@ body {
     background-repeat: no-repeat;
 }
 
-body .container>a>div.bg-secondary,
-footer,
-.item-page {
+
+footer {
     backdrop-filter: var(--bg-blur);
 }
 
@@ -31,6 +30,32 @@ footer,
 .item-page section.row {
     --bs-bg-opacity: 0.5;
     background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.shoes-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.shoes-container .item {
+    width: 100%;
+}
+
+.shoes-container .item>a>div {
+    height: 100%;
+
+}
+
+@media (max-width: 560px) {
+    .shoes-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .shoes-container .item>* {
+        width: min(max-content, 100%);
+        margin: auto;
+    }
 }
 
 header {
