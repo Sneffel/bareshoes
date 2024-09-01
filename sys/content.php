@@ -12,10 +12,11 @@ $headText = '<meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@900&family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">';
 
 
-$scriptsText = '<script src="./sys/theme.js"></script>';
-
-define('FOOTER',
-'<footer class="d-flex flex-wrap justify-content-between align-items-center p-3 mt-5 border-top mt-auto">
+// $scriptsText = '<script src="./sys/theme.js"></script>';
+$scriptsText = '';
+define(
+  'FOOTER',
+  '<footer class="d-flex flex-wrap justify-content-between align-items-center p-3 mt-5 mt-auto">
 <p class="col-md-4 mb-0 text-muted">© 2024 Bare Shoes Shopping, Inc</p>
 
 <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -29,4 +30,5 @@ define('FOOTER',
   <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
   <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>-->
 </ul>
-</footer>');
+</footer>'
+);

@@ -1,21 +1,55 @@
 /* Add your existing styles here */
 
-body, textarea {
+body,
+textarea {
     font-family: 'Jost', sans-serif;
 }
+
 /*
 p, h1, h2, h3, div, span, a, li, td, th, strong, em, small, big, i, b, u, s, sub, sup {
     transition: color 0.5s ease;
 }
 */
-#theme-switcher{
+:root {
+    --bs-secondary-rgb: 150, 105, 100;
+    --bg-blur: blur(20px);
+}
+
+body {
+    background-image: url('assets/img/blob-scene.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body .container>a>div.bg-secondary,
+footer,
+.item-page {
+    backdrop-filter: var(--bg-blur);
+}
+
+footer,.item-page section.row {
+    --bs-bg-opacity: 0.5;
+    background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
+}
+
+header{
+    background-image: url('assets/img/title-bg.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+#theme-switcher {
     font-size: 1.75em;
 }
-#logo{
+
+#logo {
     position: relative;
-    top:5px;
+    top: 5px;
+    filter: invert(1);
 }
-@media (width >= 576px) {
+
+@media (width >=576px) {
     #logo {
         position: absolute;
         left: 0;
@@ -24,60 +58,83 @@ p, h1, h2, h3, div, span, a, li, td, th, strong, em, small, big, i, b, u, s, sub
     }
 }
 
-h1{
+.logo {
+    filter: invert(1);
+}
+
+h1 {
 
     font-family: 'Darker Grotesque', sans-serif;
     font-size: 4em;
 }
-h2{
+
+h2 {
     font-family: 'Jost', sans-serif;
     font-weight: 700;
 }
-.bi-star-fill, .bi-star-half, .bi-star{
+
+.bi-star-fill,
+.bi-star-half,
+.bi-star {
     font-size: 2em;
 }
-.price{
+
+.price {
     color: black !important;
-    text-shadow: 0.000em 0.3em #fff, 0.116em 0.276em #fff, 0.212em 0.212em #fff, 0.276em 0.116em #fff, 0.3em 0.000em #fff, 0.276em -0.116em #fff, 0.212em -0.212em #fff, 0.116em -0.276em #fff, 0.000em -0.3em #fff, -0.116em -0.276em #fff, -0.212em -0.212em #fff, -0.276em -0.116em #fff, -0.3em -0.000em #fff, -0.276em 0.116em #fff, -0.212em 0.212em #fff, -0.116em 0.276em #fff;    font-weight: 600;
+    text-shadow: 0.000em 0.3em #fff, 0.116em 0.276em #fff, 0.212em 0.212em #fff, 0.276em 0.116em #fff, 0.3em 0.000em #fff, 0.276em -0.116em #fff, 0.212em -0.212em #fff, 0.116em -0.276em #fff, 0.000em -0.3em #fff, -0.116em -0.276em #fff, -0.212em -0.212em #fff, -0.276em -0.116em #fff, -0.3em -0.000em #fff, -0.276em 0.116em #fff, -0.212em 0.212em #fff, -0.116em 0.276em #fff;
+    font-weight: 600;
     font-family: 'Jost', sans-serif;
     top: 160px !important;
 }
+
 .fraction {
-	top: -0.9em;
-	position: relative;
+    top: -0.9em;
+    position: relative;
 }
-.price > span:nth-child(1){
+
+.price>span:nth-child(1) {
     font-size: 3.5em;
 }
-.stars.animate > i:hover {
-    font-size: 2.25em; /* Adjust the font size as needed */
+
+.stars.animate>i:hover {
+    font-size: 2.25em;
+    /* Adjust the font size as needed */
 }
-.stars > i {
-    transition: font-size 0.25s ease-in-out; /* Added 's' after 0.5 for seconds */
+
+.stars>i {
+    transition: font-size 0.25s ease-in-out;
+    /* Added 's' after 0.5 for seconds */
 }
-.fw-900{
+
+.fw-900 {
     font-weight: 900;
 }
-.fw-700{
+
+.fw-700 {
     font-weight: 700;
 }
-.fw-600{
+
+.fw-600 {
     font-weight: 600;
 }
-.fw-500{
+
+.fw-500 {
     font-weight: 500;
 }
-.fw-400{
+
+.fw-400 {
     font-weight: 400;
 }
-.fw-300{
+
+.fw-300 {
     font-weight: 300;
 }
-.fw-200{
+
+.fw-200 {
     font-weight: 200;
 }
 
-.shoe-title{
+.shoe-title {
     font-size: 3.5em;
     font-weight: 600;
 }
@@ -90,8 +147,8 @@ h2{
     https://fonts.google.com/specimen/Jost?preview.text=Bahnschrift&preview.size=89&stroke=Sans+Serif
 */
 
-#paypal-button-container{
-    max-width:750px; 
+#paypal-button-container {
+    max-width: 750px;
     margin: auto;
 }
 
@@ -105,7 +162,7 @@ div.radios {
     width: 100%;
 }
 
-.radios > label {
+.radios>label {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -117,6 +174,7 @@ div.radios {
     flex-grow: 1;
     user-select: none;
 }
+
 .radios>label:last-child {
     margin-right: 0;
 }
@@ -133,15 +191,24 @@ input[type="radio"]:checked+label {
     z-index: 2;
 }
 
-.max-vw-50{
+.max-vw-50 {
     max-width: 50vw;
 }
-.max-vw-80{
+
+.max-vw-80 {
     max-width: 80vw;
 }
-.w-max{
+
+.w-max {
     width: max-content;
 }
-.w-min{
+
+.w-min {
     width: min-content;
+}
+
+.savenow {
+    background-image: url('assets/img/low-poly.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
